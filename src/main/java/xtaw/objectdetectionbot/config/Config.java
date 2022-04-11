@@ -27,6 +27,8 @@ public class Config {
 
 	public String format = "%AT%\n%IMAGE%\nyolo v5 测试成功 请不要回复\n 用时: %USED_TIME%ms";
 
+	public boolean useGpu = false;
+
 	public void save() {
 		try {
 			if (!Config.CONFIG_FILE.exists()) {
@@ -48,6 +50,7 @@ public class Config {
 			jsonObject.add("Bots", jsonArrayBots);
 			jsonObject.add("Groups", jsonArrayGroups);
 			jsonObject.addProperty("Format", this.format);
+			jsonObject.addProperty("UseGpu", this.useGpu);
 			PrintWriter pw = new PrintWriter(Config.CONFIG_FILE);
 			pw.println(JsonUtil.toPrettyJson(jsonObject));
 			pw.flush();
@@ -88,6 +91,8 @@ public class Config {
 			}
 			this.format = jsonObject.get("Format")
 					.getAsString();
+			this.useGpu = jsonObject.get("UseGpu")
+					.getAsBoolean();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

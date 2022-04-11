@@ -74,6 +74,14 @@ public class CommandObjectDetection extends CompositeCommand {
 		sender.sendMessage("Done.");
 	}
 
+	@SubCommand({ "usegpu" })
+	@Description("Set if yolov5 uses gpu.")
+	public void useGpu(ConsoleCommandSender sender, @Name("state") boolean state) {
+		Config.INSTANCE.useGpu = state;
+		Config.INSTANCE.save();
+		sender.sendMessage("Done.");
+	}
+
 	@SubCommand({ "list" })
 	@Description("List the bots and the groups.")
 	public void list(ConsoleCommandSender sender) {

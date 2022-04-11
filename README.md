@@ -22,14 +22,17 @@ Bot 便会自动完成检测，并将结果发送在群中
     123456789,  
     987654321  
   ],  
-  "Format": "%AT%\n%IMAGE%\nyolo v5 测试成功 请不要回复\n 用时: %USED_TIME%ms"  
+  "Format": "%AT%\n%IMAGE%\nyolo v5 测试成功 请不要回复\n 用时: %USED_TIME%ms",  
+  "UseGpu": false  
 }
 ```  
 `Bots` 中填写 __机器人登录的qq号__，包含在其中的qq号才会执行目标检测  
 `Groups` 中填写 __你想执行目标检测的群号__，机器人只有在包含在其中的群中被@时才会执行目标检测  
 `Format` 中填写 __机器人回复格式__，一般默认即可，`\n` 代表 __换行__， `%AT%` 代表 __@执行者__， `%IMAGE%` 代表 __检测后返回的图片__， `%USED_TIME` 代表  __检测耗时__，单位为 __ms__  
+`UseGpu` 中填写 __true或false__，若没有gpu则一定填写false。默认建议启用gpu
 ## 命令
 ```
+/objectdetection usegpu <state> # 设置是否使用 Gpu, <state> 填写 true / false
 /objectdetection bot <add/remove> <id> # 添加和删除 Bots
 /objectdetection group <add/remove> <id> # 添加和删除 Groups
 /objectdetection format <format> # 设置 Format

@@ -22,6 +22,7 @@ import ai.djl.repository.zoo.ModelZoo;
 import ai.djl.repository.zoo.ZooModel;
 import ai.djl.translate.TranslateException;
 import ai.djl.translate.Translator;
+import xtaw.objectdetectionbot.config.Config;
 import xtaw.objectdetectionbot.main.MainPlugin;
 
 public class YoloV5Util {
@@ -34,15 +35,6 @@ public class YoloV5Util {
 			.optSynsetArtifactName("coco.names")
 			.build();
 
-	public static final Criteria<Image, DetectedObjects> CRITERIA = Criteria.builder()
-			.setTypes(Image.class, DetectedObjects.class)
-			.optDevice(Device.cpu())
-			.optModelPath(YoloV5Util.DIR_PATH.toPath())
-			.optModelName("model.torchscript")
-			.optTranslator(YoloV5Util.TRANSLATOR)
-			.optEngine("PyTorch")
-			.build();
-
 	private YoloV5Util() {
 	}
 
@@ -52,8 +44,16 @@ public class YoloV5Util {
 		}
 		Thread.currentThread()
 				.setContextClassLoader(MainPlugin.class.getClassLoader());
+		Criteria<Image, DetectedObjects> criteria = Criteria.builder()
+				.setTypes(Image.class, DetectedObjects.class)
+				.optDevice(Config.INSTANCE.useGpu ? Device.gpu() : Device.cpu())
+				.optModelPath(YoloV5Util.DIR_PATH.toPath())
+				.optModelName("model.torchscript")
+				.optTranslator(YoloV5Util.TRANSLATOR)
+				.optEngine("PyTorch")
+				.build();
 		BufferedImage letterBox = null;
-		try (ZooModel<Image, DetectedObjects> model = ModelZoo.loadModel(YoloV5Util.CRITERIA)) {
+		try (ZooModel<Image, DetectedObjects> model = ModelZoo.loadModel(criteria)) {
 			int width = image.getWidth(null);
 			int height = image.getHeight(null);
 			double scale = Math.max(width, height) / 640D;
