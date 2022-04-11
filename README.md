@@ -1,6 +1,6 @@
 # ObjectDetectionBot
 ## 初始化工作
-把 __`yolov5.7z`__ 中的 __`coco.names`__ 和 模型 __`(.torchscript)`__ 解压放在 __`/data/xtaw.objectdetectionbot/yolov5/`__ 目录下  
+把 __`yolov5.zip`__ 中的 __`coco.names`__ 和 模型 __`(.torchscript)`__ 解压放在 __`/data/xtaw.objectdetectionbot/yolov5/`__ 目录下  
 并将模型改名为 __`model.torchscript`__  
 模型共有五种，根据需要自行选择即可。文件越大，准确度越高，速度越慢  
 ## 使用方法
