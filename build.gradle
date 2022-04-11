@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.10'
+    id 'net.mamoe.mirai-console' version '2.11.0-M2.2'
+}
+
+group = "xtaw.objectdetectionbot"
+version = "1.0.0"
+
+repositories {
+    jcenter()
+    maven { url = uri("https://dl.bintray.com/karlatemp/misc") }
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+dependencies {
+	compile group: 'ai.djl', name: 'api', version: '0.16.0'
+	compile group: 'ai.djl.pytorch', name: 'pytorch-native-auto', version: '1.9.1'
+	compile group: 'ai.djl.pytorch', name: 'pytorch-engine', version: '0.16.0'
+	compile group: 'ai.djl.pytorch', name: 'pytorch-model-zoo', version: '0.16.0'
+}
+
+jar {
+    from { 
+        configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it).matching {
+				exclude {
+					it.name == 'ai.djl.repository.zoo.ZooProvider'
+				}
+			}
+        }
+    }
+}
