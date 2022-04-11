@@ -33,11 +33,7 @@ public class MainPlugin extends JavaPlugin {
 	private List<Listener<?>> registeredEvents = new ArrayList<>();
 
 	private MainPlugin() {
-<<<<<<< HEAD
-		super(new JvmPluginDescriptionBuilder("xtaw.objectdetectionbot", "1.0.0").name("ObjectDetectionBot")
-=======
 		super(new JvmPluginDescriptionBuilder("xtaw.objectdetectionbot", "1.0.0").name("ObjectDetection")
->>>>>>> 4e10fda (new)
 				.build());
 	}
 
